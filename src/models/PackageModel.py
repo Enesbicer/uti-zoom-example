@@ -1,7 +1,8 @@
-
 from pydantic import Field, validator
 from typing import List, Optional, Union, Literal
 from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, Config
+
+
 
 
 class InputImage(Input):
@@ -38,6 +39,9 @@ class OutputImage(Output):
         title = "Image"
 
 
+
+
+
 class KeepSideFalse(Config):
     name: Literal["False"] = "False"
     value: Literal[False] = False
@@ -58,6 +62,13 @@ class KeepSideTrue(Config):
         title = "Enable"
 
 
+
+
+
+
+
+
+
 class KeepSideBBox(Config):
     """
         Rotate image without catting off sides.
@@ -71,36 +82,39 @@ class KeepSideBBox(Config):
         title = "Keep Sides"
 
 
+
+
+
+
 class Degree(Config):
     """
-        Positive angles specify counterclockwise rotation while negative angles indicate clockwise rotation.
+        Burası parametrenin yorumudur, Config açıklaması olarak görünür.
     """
     name: Literal["Degree"] = "Degree"
     value: int = Field(ge=-359.0, le=359.0,default=0)
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
-    placeHolder: Literal["[-359, 359]"] = "[-359, 359]"
 
     class Config:
-        title = "Angle"
+        title = "Angleeee"
 
 
-class RotationInputs(Inputs):
+
+class ZoomExampleExecutorInputs(Inputs):
     inputImage: InputImage
 
 
-class RotationConfigs(Configs):
+class ZoomExampleExecutorConfigs(Configs):
     degree: Degree
     drawBBox: KeepSideBBox
 
 
-class RotationOutputs(Outputs):
-    outputImage: OutputImage
 
 
-class RotationRequest(Request):
-    inputs: Optional[RotationInputs]
-    configs: RotationConfigs
+
+class ZoomExampleExecutorRequest(Request):
+    inputs: Optional[ZoomExampleExecutorInputs]
+    configs: ZoomExampleExecutorConfigs
 
     class Config:
         json_schema_extra = {
@@ -108,37 +122,43 @@ class RotationRequest(Request):
         }
 
 
-class RotationResponse(Response):
-    outputs: RotationOutputs
+
+class ZoomExampleExecutorOutputs(Outputs):
+    outputImage: OutputImage
 
 
-class RotationExecutor(Config):
-    name: Literal["Rotation"] = "Rotation"
-    value: Union[RotationRequest, RotationResponse]
+
+class ZoomExampleExecutorResponse(Response):
+    outputs: ZoomExampleExecutorOutputs
+
+
+class ZoomExampleExecutor(Config):
+    name: Literal["ZoomExampleExecutor"] = "ZoomExampleExecutor"
+    value: Union[ZoomExampleExecutorRequest, ZoomExampleExecutorResponse]
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Rotation"
+        title = "ZoomExampleExecutor"
         json_schema_extra = {
             "target": {
                 "value": 0
             }
         }
 
-
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
-    value: Union[RotationExecutor]
+    value: Union[ZoomExampleExecutor]
     type: Literal["executor"] = "executor"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
     class Config:
         title = "Task"
+
+
         json_schema_extra = {
             "target": "value"
         }
-
 
 class PackageConfigs(Configs):
     executor: ConfigExecutor
