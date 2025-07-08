@@ -96,7 +96,7 @@ class Degree(Config):
     field: Literal["textInput"] = "textInput"
 
     class Config:
-        title = "Angleeee"
+        title = "Angleeeee"
 
 
 
