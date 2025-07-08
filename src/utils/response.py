@@ -1,15 +1,16 @@
 
 from sdks.novavision.src.helper.package import PackageHelper
-from components.Rotation.src.models.PackageModel import PackageModel, PackageConfigs, ConfigExecutor, RotationOutputs, RotationResponse, RotationExecutor, OutputImage
+from components.ZoomExample.src.models.PackageModel import (PackageModel, PackageConfigs,
+ConfigExecutor, ZoomExampleExecutor,ZoomExampleExecutorResponse,ZoomExampleExecutorOutputs,OutputImage)
 
 
 def build_response(context):
     outputImage = OutputImage(value=context.image)
-    Outputs = RotationOutputs(outputImage=outputImage)
-    rotationResponse = RotationResponse(outputs=Outputs)
-    rotationExecutor = RotationExecutor(value=rotationResponse)
-    executor = ConfigExecutor(value=rotationExecutor)
-    packageConfigs = PackageConfigs(executor=executor)
+    zoomExampleExecutorOutputs = ZoomExampleExecutorOutputs(outputImage=outputImage)
+    zoomExampleExecutorResponse=ZoomExampleExecutorResponse(outputs=zoomExampleExecutorOutputs)
+    zoomExampleExecutor=ZoomExampleExecutor(value=zoomExampleExecutorResponse)
+    configExecutor=ConfigExecutor(value= zoomExampleExecutor)
+    packageConfigs = PackageConfigs(executor=configExecutor)
     package = PackageHelper(packageModel=PackageModel, packageConfigs=packageConfigs)
     packageModel = package.build_model(context)
     return packageModel
