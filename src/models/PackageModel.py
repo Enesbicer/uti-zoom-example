@@ -22,6 +22,7 @@ class InputImage(Input):
         title = "Image"
 
 
+
 class OutputImage(Output):
     name: Literal["outputImage"] = "outputImage"
     value: Union[List[Image],Image]
