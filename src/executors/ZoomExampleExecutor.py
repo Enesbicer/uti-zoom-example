@@ -28,7 +28,7 @@ class ZoomExampleExecutor(Component):
 
     def zoom(self,image):
         h, w = image.shape[:2]
-        scale = self.zoomVariable / 100.0  # 1 ile 100 arasında (%)
+        scale = self.zoomVariable / 100.0
 
         # Yeni kırpılacak boyut
         new_h = int(h * scale)
