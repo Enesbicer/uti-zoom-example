@@ -34,7 +34,7 @@ class InputImageTwo(Input):
             return "list"
 
     class Config:
-        title = "Texet"
+        title = "Text"
 
 
 class OutputImage(Output):
@@ -75,7 +75,7 @@ class TextWriterText(Config):
     """
          Resimde görünmesini istediğiniz text'i girininiz
     """
-    name: Literal["configType"] = "configType"
+    name: Literal["configTypeTextWriter"] = "configTypeTextWriter"
     value: str
     type: Literal["string"] = "string"
     field: Literal["textInput"] = "textInput"
@@ -86,8 +86,8 @@ class TextWriterText(Config):
 
 class Top(Config):
     configEdit: TextWriterText
-    name:Literal["LocalThresholding"] = "LocalThresholding"
-    value:Literal["LocalThresholding"] = "LocalThresholding"
+    name:Literal["Top"] = "Top"
+    value:Literal["Top"] = "Top"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
@@ -95,8 +95,8 @@ class Top(Config):
         title = "Local Thresholding"
 class Center(Config):
     configEdit: TextWriterText
-    name:Literal["LocalThresholding"] = "LocalThresholding"
-    value:Literal["LocalThresholding"] = "LocalThresholding"
+    name:Literal["Center"] = "Center"
+    value:Literal["Center"] = "Center"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
@@ -106,7 +106,7 @@ class ConfigTypeTextWriter(Config):
     """
         Yazınızın resimde ki konumu.
     """
-    name: Literal["configType"] = "configType"
+    name: Literal["zoomVariable"] = "zoomVariable"
     value: Union[Center, Top]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
@@ -246,6 +246,7 @@ class PackageModel(Package):
     configs: PackageConfigs
     type: Literal["component"] = "component"
     name: Literal["ZoomExample"] = "ZoomExample"
+
 
 
 
