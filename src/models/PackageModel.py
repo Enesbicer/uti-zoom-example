@@ -34,7 +34,7 @@ class InputImageTwo(Input):
             return "list"
 
     class Config:
-        title = "Text"
+        title = "Texet"
 
 
 class OutputImage(Output):
