@@ -3,8 +3,6 @@ from typing import List, Optional, Union, Literal
 from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, Config
 
 
-
-
 class InputImage(Input):
     name: Literal["inputImage"] = "inputImage"
     value: Union[List[Image], Image]
@@ -22,10 +20,9 @@ class InputImage(Input):
         title = "Image"
 
 
-
 class OutputImage(Output):
     name: Literal["outputImage"] = "outputImage"
-    value: Union[List[Image],Image]
+    value: Union[List[Image], Image]
     type: str = "object"
 
     @validator("type", pre=True, always=True)
@@ -38,9 +35,6 @@ class OutputImage(Output):
 
     class Config:
         title = "Image"
-
-
-
 
 
 class KeepSideFalse(Config):
@@ -63,13 +57,6 @@ class KeepSideTrue(Config):
         title = "Enable"
 
 
-
-
-
-
-
-
-
 class KeepSideBBox(Config):
     """
         Rotate image without catting off sides.
@@ -83,22 +70,17 @@ class KeepSideBBox(Config):
         title = "Keep Sides"
 
 
-
-
-
-
 class Degree(Config):
     """
         Burası parametrenin yorumudur, Config açıklaması olarak görünür.
     """
     name: Literal["Degree"] = "Degree"
-    value: int = Field(ge=-359.0, le=359.0,default=0)
+    value: int = Field(ge=-359.0, le=359.0, default=0)
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
 
     class Config:
         title = "Angleeeee"
-
 
 
 class ZoomExampleExecutorInputs(Inputs):
@@ -108,9 +90,6 @@ class ZoomExampleExecutorInputs(Inputs):
 class ZoomExampleExecutorConfigs(Configs):
     degree: Degree
     drawBBox: KeepSideBBox
-
-
-
 
 
 class ZoomExampleExecutorRequest(Request):
@@ -123,10 +102,8 @@ class ZoomExampleExecutorRequest(Request):
         }
 
 
-
 class ZoomExampleExecutorOutputs(Outputs):
     outputImage: OutputImage
-
 
 
 class ZoomExampleExecutorResponse(Response):
@@ -147,6 +124,7 @@ class ZoomExampleExecutor(Config):
             }
         }
 
+
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
     value: Union[ZoomExampleExecutor]
@@ -156,10 +134,10 @@ class ConfigExecutor(Config):
     class Config:
         title = "Task"
 
-
         json_schema_extra = {
             "target": "value"
         }
+
 
 class PackageConfigs(Configs):
     executor: ConfigExecutor
