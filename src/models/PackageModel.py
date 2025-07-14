@@ -185,7 +185,7 @@ class ZoomExampleExecutorInputs(Inputs):
 
 
 class ZoomExampleExecutorConfigs(Configs):
-    zoomVariable=ZoomVariable
+    zoomVariable:ZoomVariable
 
 
 class ZoomExampleExecutorOutputs(Outputs):
