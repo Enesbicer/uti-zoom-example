@@ -1,8 +1,6 @@
-from google.protobuf.text_format import TextWriter
 from pydantic import Field, validator
 from typing import List, Optional, Union, Literal
-from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, \
-    Config
+from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, Config
 
 
 class InputImage(Input):
@@ -88,26 +86,22 @@ class TextWriterText(Config):
 
 class Top(Config):
     configEdit: TextWriterText
-    name: Literal["LocalThresholding"] = "LocalThresholding"
-    value: Literal["LocalThresholding"] = "LocalThresholding"
+    name:Literal["LocalThresholding"] = "LocalThresholding"
+    value:Literal["LocalThresholding"] = "LocalThresholding"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
         title = "Local Thresholding"
-
-
 class Center(Config):
     configEdit: TextWriterText
-    name: Literal["LocalThresholding"] = "LocalThresholding"
-    value: Literal["LocalThresholding"] = "LocalThresholding"
+    name:Literal["LocalThresholding"] = "LocalThresholding"
+    value:Literal["LocalThresholding"] = "LocalThresholding"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
         title = "Local Thresholding"
-
-
 class ConfigTypeTextWriter(Config):
     """
         Yazınızın resimde ki konumu.
@@ -134,17 +128,22 @@ class ZoomVariable(Config):
         title = "Zoom Percentage"
 
 
+
+
+
+
+
+
 class TextWriterExecutorInputs(Inputs):
     inputImage: InputImage
 
 
 class TextWriterExecutorConfigs(Configs):
-    configTypeTextWriter: ConfigTypeTextWriter
+    configTypeTextWriter : ConfigTypeTextWriter
 
 
 class TextWriterExecutorOutputs(Outputs):
     outputImage: OutputImage
-
 
 class TextWriterExecutorRequest(Request):
     inputs: Optional[TextWriterExecutorInputs]
@@ -155,10 +154,8 @@ class TextWriterExecutorRequest(Request):
             "target": "configs"
         }
 
-
 class TextWriterExecutorResponse(Response):
     outputs: TextWriterExecutorOutputs
-
 
 class TextWriterExecutor(Config):
     name: Literal["TextWriterExecutor"] = "TextWriterExecutor"
@@ -175,17 +172,23 @@ class TextWriterExecutor(Config):
         }
 
 
+
+
+
+
+
+
+
 class ZoomExampleExecutorInputs(Inputs):
     inputImage: InputImage
 
 
 class ZoomExampleExecutorConfigs(Configs):
-    zoomVariable = ZoomVariable
+    zoomVariable=ZoomVariable
 
 
 class ZoomExampleExecutorOutputs(Outputs):
     outputImage: OutputImage
-
 
 class ZoomExampleExecutorRequest(Request):
     inputs: Optional[ZoomExampleExecutorInputs]
@@ -196,10 +199,8 @@ class ZoomExampleExecutorRequest(Request):
             "target": "configs"
         }
 
-
 class ZoomExampleExecutorResponse(Response):
     outputs: ZoomExampleExecutorOutputs
-
 
 class ZoomExampleExecutor(Config):
     name: Literal["ZoomExampleExecutor"] = "ZoomExampleExecutor"
@@ -216,14 +217,25 @@ class ZoomExampleExecutor(Config):
         }
 
 
+
+
+
+
+
+
+
+
+
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
-    value: Union[ZoomExampleExecutor, TextWriterExecutor]
+    value: Union[ZoomExampleExecutor,TextWriterExecutor]
     type: Literal["executor"] = "executor"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
+
     class Config:
         title = "Task"
+
 
 
 class PackageConfigs(Configs):
