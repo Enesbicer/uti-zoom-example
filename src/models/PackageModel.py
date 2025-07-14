@@ -92,7 +92,7 @@ class Top(Config):
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Local Thresholding"
+        title = "Top"
 class Center(Config):
     configEdit: TextWriterText
     name:Literal["Center"] = "Center"
@@ -101,7 +101,7 @@ class Center(Config):
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Local Thresholding"
+        title = "Center"
 class ConfigTypeTextWriter(Config):
     """
         Yazınızın resimde ki konumu.
@@ -123,6 +123,7 @@ class ZoomVariable(Config):
     value: int = Field(default=1, ge=1, le=100)
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
+    placeHolder: Literal["integers between [0, 100]"] = "integers between [0, 100]"
 
     class Config:
         title = "Zoom Percentage"
