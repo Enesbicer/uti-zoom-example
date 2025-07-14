@@ -75,7 +75,7 @@ class TextWriterText(Config):
     """
          Resimde görünmesini istediğiniz text'i girininiz
     """
-    name: Literal["configTypeTextWriter"] = "configTypeTextWriter"
+    name: Literal["textWriterText"] = "textWriterText"
     value: str
     type: Literal["string"] = "string"
     field: Literal["textInput"] = "textInput"
@@ -106,7 +106,7 @@ class ConfigTypeTextWriter(Config):
     """
         Yazınızın resimde ki konumu.
     """
-    name: Literal["zoomVariable"] = "zoomVariable"
+    name: Literal["configTypeTextWriter"] = "configTypeTextWriter"
     value: Union[Center, Top]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
