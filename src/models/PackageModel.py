@@ -1,6 +1,8 @@
+from google.protobuf.text_format import TextWriter
 from pydantic import Field, validator
 from typing import List, Optional, Union, Literal
-from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, Config
+from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, \
+    Config
 
 
 class InputImage(Input):
@@ -20,6 +22,23 @@ class InputImage(Input):
         title = "Image"
 
 
+class InputImageTwo(Input):
+    name: Literal["inputText"] = "inputText"
+    value: Union[List[Image], Image]
+    type: str = "object"
+
+    @validator("type", pre=True, always=True)
+    def set_type_based_on_value(cls, value, values):
+        value = values.get('value')
+        if isinstance(value, Image):
+            return "object"
+        elif isinstance(value, list):
+            return "list"
+
+    class Config:
+        title = "Text"
+
+
 class OutputImage(Output):
     name: Literal["outputImage"] = "outputImage"
     value: Union[List[Image], Image]
@@ -37,50 +56,123 @@ class OutputImage(Output):
         title = "Image"
 
 
-class KeepSideFalse(Config):
-    name: Literal["False"] = "False"
-    value: Literal[False] = False
-    type: Literal["bool"] = "bool"
+class OutputImageTwo(Output):
+    name: Literal["outputText"] = "outputText"
+    value: Union[List[Image], Image]
+    type: str = "object"
+
+    @validator("type", pre=True, always=True)
+    def set_type_based_on_value(cls, value, values):
+        value = values.get('value')
+        if isinstance(value, Image):
+            return "object"
+        elif isinstance(value, list):
+            return "list"
+
+    class Config:
+        title = "Text"
+
+
+class TextWriterText(Config):
+    """
+         Resimde görünmesini istediğiniz text'i girininiz
+    """
+    name: Literal["configType"] = "configType"
+    value: str
+    type: Literal["string"] = "string"
+    field: Literal["textInput"] = "textInput"
+
+    class Config:
+        title = "Text Writer Input"
+
+
+class Top(Config):
+    configEdit: TextWriterText
+    name: Literal["LocalThresholding"] = "LocalThresholding"
+    value: Literal["LocalThresholding"] = "LocalThresholding"
+    type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Disable"
+        title = "Local Thresholding"
 
 
-class KeepSideTrue(Config):
-    name: Literal["True"] = "True"
-    value: Literal[True] = True
-    type: Literal["bool"] = "bool"
+class Center(Config):
+    configEdit: TextWriterText
+    name: Literal["LocalThresholding"] = "LocalThresholding"
+    value: Literal["LocalThresholding"] = "LocalThresholding"
+    type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Enable"
+        title = "Local Thresholding"
 
 
-class KeepSideBBox(Config):
+class ConfigTypeTextWriter(Config):
     """
-        Rotate image without catting off sides.
+        Yazınızın resimde ki konumu.
     """
-    name: Literal["KeepSide"] = "KeepSide"
-    value: Union[KeepSideTrue, KeepSideFalse]
+    name: Literal["configType"] = "configType"
+    value: Union[Center, Top]
     type: Literal["object"] = "object"
-    field: Literal["dropdownlist"] = "dropdownlist"
+    field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
     class Config:
-        title = "Keep Sides"
+        title = "Text Writer"
 
 
-class Degree(Config):
+class ZoomVariable(Config):
     """
-        Burası parametrenin yorumudur, Config açıklaması olarak görünür.
+         Ne kadar zoom yapmak istediğinizi yüzdelik üzerinden giriniz.
     """
-    name: Literal["Degree"] = "Degree"
-    value: int = Field(ge=-359.0, le=359.0, default=0)
+    name: Literal["configType"] = "configType"
+    value: int = Field(ge=1, le=100, default=1)
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
 
     class Config:
-        title = "Angleeeee"
+        title = "Zoom Percentage"
+
+
+class TextWriterExecutorInputs(Inputs):
+    inputImage: InputImage
+
+
+class TextWriterExecutorConfigs(Configs):
+    configTypeTextWriter: ConfigTypeTextWriter
+
+
+class TextWriterExecutorOutputs(Outputs):
+    outputImage: OutputImage
+
+
+class TextWriterExecutorRequest(Request):
+    inputs: Optional[TextWriterExecutorInputs]
+    configs: TextWriterExecutorConfigs
+
+    class Config:
+        json_schema_extra = {
+            "target": "configs"
+        }
+
+
+class TextWriterExecutorResponse(Response):
+    outputs: TextWriterExecutorOutputs
+
+
+class TextWriterExecutor(Config):
+    name: Literal["TextWriterExecutor"] = "TextWriterExecutor"
+    value: Union[TextWriterExecutorRequest, TextWriterExecutorResponse]
+    type: Literal["object"] = "object"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "TextWriterExecutor"
+        json_schema_extra = {
+            "target": {
+                "value": 0
+            }
+        }
 
 
 class ZoomExampleExecutorInputs(Inputs):
@@ -88,8 +180,11 @@ class ZoomExampleExecutorInputs(Inputs):
 
 
 class ZoomExampleExecutorConfigs(Configs):
-    degree: Degree
-    drawBBox: KeepSideBBox
+    zoomVariable = ZoomVariable
+
+
+class ZoomExampleExecutorOutputs(Outputs):
+    outputImage: OutputImage
 
 
 class ZoomExampleExecutorRequest(Request):
@@ -100,10 +195,6 @@ class ZoomExampleExecutorRequest(Request):
         json_schema_extra = {
             "target": "configs"
         }
-
-
-class ZoomExampleExecutorOutputs(Outputs):
-    outputImage: OutputImage
 
 
 class ZoomExampleExecutorResponse(Response):
@@ -127,16 +218,12 @@ class ZoomExampleExecutor(Config):
 
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
-    value: Union[ZoomExampleExecutor]
+    value: Union[ZoomExampleExecutor, TextWriterExecutor]
     type: Literal["executor"] = "executor"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
     class Config:
         title = "Task"
-
-        json_schema_extra = {
-            "target": "value"
-        }
 
 
 class PackageConfigs(Configs):
@@ -147,3 +234,6 @@ class PackageModel(Package):
     configs: PackageConfigs
     type: Literal["component"] = "component"
     name: Literal["ZoomExample"] = "ZoomExample"
+
+
+
