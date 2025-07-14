@@ -119,7 +119,7 @@ class ZoomVariable(Config):
     """
          Ne kadar zoom yapmak istediğinizi yüzdelik üzerinden giriniz.
     """
-    name: Literal["configType"] = "configType"
+    name: Literal["zoomVariable"] = "zoomVariable"
     value: int = Field(default=1, ge=1, le=100)
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
