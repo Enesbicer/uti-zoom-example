@@ -19,8 +19,7 @@ class ZoomExampleExecutor(Component):
     def __init__(self, request, bootstrap):
         super().__init__(request, bootstrap)
         self.request.model = PackageModel(**(self.request.data))
-        self.rotation_degree = self.request.get_param("Degree")
-        self.keep_side = self.request.get_param("KeepSide")
+        self.zoomVariable=self.request.param("zoomVariable")
         self.image = self.request.get_param("inputImage")
 
     @staticmethod
@@ -28,14 +27,17 @@ class ZoomExampleExecutor(Component):
         return {}
 
     def zoom(self,img):
-        return  img[50:180, 100:300]
-
+        self.reHeight = int(img.shape[0] * (100 + self.zoomVariable) / 100)
+        self.reWidth = int(img.shape[1] * (100 + self.zoomVariable) / 100)
+        down_points = (self.reWidth, self.reHeight)
+        resized_image = cv2.resize(img, down_points, interpolation=cv2.INTER_LINEAR)
+        return resized_image
 
     def run(self):
         img =Image.get_frame(img=self.image,redis_db=self.redis_db)
         img.value=self.zoom(img.value)
         self.image = Image.set_frame(img=img, package_uID=self.uID, redis_db=self.redis_db)
-        packageModel = build_response(context=self)
+        packageModel = build_response_zoom(context=self)
         return packageModel
 
 if "__main__" == __name__:
