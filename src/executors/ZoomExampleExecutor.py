@@ -26,23 +26,15 @@ class ZoomExampleExecutor(Component):
     def bootstrap(config: dict) -> dict:
         return {}
 
-    def zoom(self,image):
+    def zoom(self, image):
         h, w = image.shape[:2]
-        scale = self.zoomVariable / 100.0
-
-        # Yeni kırpılacak boyut
-        new_h = int(h * scale)
-        new_w = int(w * scale)
-
-        # Orta noktayı bul
+        zoom_factor = 1 + (self.zoomVariable / 100)
+        new_h = int(h / zoom_factor)
+        new_w = int(w / zoom_factor)
         center_y = h // 2
         center_x = w // 2
-
-        # Kırpılacak bölgenin başlangıç koordinatları
         start_y = center_y - new_h // 2
         start_x = center_x - new_w // 2
-
-        # Kırp ve yeniden boyutlandır
         cropped = image[start_y:start_y + new_h, start_x:start_x + new_w]
         zoomed = cv2.resize(cropped, (w, h), interpolation=cv2.INTER_LINEAR)
 
