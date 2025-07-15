@@ -17,7 +17,7 @@ def build_response_zoom(context):
 
 def build_response_textwriter(context):
     outputImage = OutputImage(value=context.image)
-    outputSecondImage = OutputSecondImage(value=context.image)
+    outputSecondImage = OutputSecondImage(value=context.secondImage)
     textWriterExecutorOutputs = TextWriterExecutorOutputs(outputImage=outputImage, outputSecondImage=outputSecondImage)
     textWriterExecutorResponse = TextWriterExecutorResponse(outputs=textWriterExecutorOutputs)
     textWriterExecutor = TextWriterExecutor(value=textWriterExecutorResponse)
