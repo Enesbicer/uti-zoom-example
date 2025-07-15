@@ -136,7 +136,7 @@ class ConfigTypeTextWriter(Config):
         Yazınızın resimde ki konumu.
     """
     name: Literal["configTypeTextWriter"] = "configTypeTextWriter"
-    value: Union[Center, Top]
+    value: Union[Center,Top,Left,Right,Bottom]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
