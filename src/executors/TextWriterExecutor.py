@@ -41,9 +41,9 @@ class TextWriterExecutor(Component):
         else:
             x, y = 10, 30  # fallback default
 
-        # Text gölgesi için önce siyah arka plan çiz (kontrast)
+
         cv2.putText(self.image, self.textWriterText, (x + 2, y + 2), font, font_scale, (0, 0, 0), thickness + 1, cv2.LINE_AA)
-        # Ana yazı
+
         cv2.putText(self.secondImage, self.textWriterText, (x, y), font, font_scale, color, thickness, cv2.LINE_AA)
         return img
 
