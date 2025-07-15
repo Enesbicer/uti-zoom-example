@@ -53,7 +53,7 @@ class TextWriterExecutor(Component):
         img2 = Image.get_frame(img=self.secondImage, redis_db=self.redis_db)
         img1.value=self.TextWriter(img1.value, img2.value)
         self.image = Image.set_frame(img=img1, package_uID=self.uID, redis_db=self.redis_db)
-        packageModel = build_response_texwriter(context=self)
+        packageModel = build_response_textwriter(context=self)
         return packageModel
 
 if "__main__" == __name__:
