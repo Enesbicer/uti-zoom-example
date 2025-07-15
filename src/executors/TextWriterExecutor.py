@@ -23,36 +23,51 @@ class TextWriterExecutor(Component):
     def bootstrap(config: dict) -> dict:
         return {}
 
-    def TextWriter(self,img):
+    def TextWriter(self,img1,img2):
         font = cv2.FONT_HERSHEY_SIMPLEX
-        font_scale = 1.2
-        thickness = 2
-        color = (255, 255, 255)
+        font_scale = 2.0
+        thickness = 3
+        color = (255, 255, 255)  # Beyaz text
+        shadow_color = (0, 0, 0)  # Siyah gölge
 
         (text_width, text_height), _ = cv2.getTextSize(self.textWriterText, font, font_scale, thickness)
-        h, w = img.shape[:2]
+        h, w = img1.shape[:2]
 
-        if self.configTypeTextWriter== "Center":
+
+        if self.configTypeTextWriter == "Center":
             x = (w - text_width) // 2
             y = (h + text_height) // 2
-        elif self.configTypeTextWriter== "Top":
+        elif self.configTypeTextWriter == "Top":
             x = (w - text_width) // 2
-            y = text_height + 10
+            y = text_height + 20
         else:
-            x, y = 10, 30  # fallback default
+            x, y = 50, 50
 
 
-        cv2.putText(self.image, self.textWriterText, (x + 2, y + 2), font, font_scale, (0, 0, 0), thickness + 1, cv2.LINE_AA)
+        if x < 0: x = 10
+        if y < text_height: y = text_height + 10
+        if x + text_width > w: x = w - text_width - 10
+        if y > h - 10: y = h - 20
 
-        cv2.putText(self.secondImage, self.textWriterText, (x, y), font, font_scale, color, thickness, cv2.LINE_AA)
-        return img
 
+
+        cv2.putText(img1, self.textWriterText, (x + 3, y + 3), font, font_scale, shadow_color, thickness + 1,
+                    cv2.LINE_AA)
+        cv2.putText(img1, self.textWriterText, (x, y), font, font_scale, color, thickness, cv2.LINE_AA)
+
+
+        cv2.putText(img2, self.textWriterText, (x + 3, y + 3), font, font_scale, shadow_color, thickness + 1,
+                    cv2.LINE_AA)
+        cv2.putText(img2, self.textWriterText, (x, y), font, font_scale, color, thickness, cv2.LINE_AA)
+
+        return img1, img2
 
     def run(self):
         img1 =Image.get_frame(img=self.image,redis_db=self.redis_db)
         img2 = Image.get_frame(img=self.secondImage, redis_db=self.redis_db)
-        img1.value=self.TextWriter(img1.value, img2.value)
+        img1.value, img2.value = self.TextWriter(img1.value, img2.value)
         self.image = Image.set_frame(img=img1, package_uID=self.uID, redis_db=self.redis_db)
+        self.secondImage = Image.set_frame(img=img2, package_uID=self.uID, redis_db=self.redis_db)
         packageModel = build_response_textwriter(context=self)
         return packageModel
 
