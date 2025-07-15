@@ -34,7 +34,7 @@ class InputSecondImage(Input):
             return "list"
 
     class Config:
-        title = "Text"
+        title = "Image"
 
 
 class OutputImage(Output):
@@ -68,7 +68,7 @@ class OutputSecondImage(Output):
             return "list"
 
     class Config:
-        title = "Text"
+        title = "Image"
 
 
 class TextWriterText(Config):
