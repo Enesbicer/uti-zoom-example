@@ -13,8 +13,7 @@ class TextWriterExecutor(Component):
         super().__init__(request, bootstrap)
         self.request.model = PackageModel(**(self.request.data))
         self.textWriterText = self.request.get_param("textWriterText")
-        self.imageFirst = self.request.get_param("inputFirstImage")
-        self.imageSecond = self.request.get_param("inputSecondImage")
+        self.image = self.request.get_param("inputImage")
         self.configTypeTextWriter = self.request.get_param("configTypeTextWriter")
 
     @staticmethod
