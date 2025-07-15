@@ -13,21 +13,23 @@ class TextWriterExecutor(Component):
         super().__init__(request, bootstrap)
         self.request.model = PackageModel(**(self.request.data))
         self.textWriterText = self.request.get_param("textWriterText")
-        self.image = self.request.get_param("inputImage")
+        self.imageFirst = self.request.get_param("inputFirstImage")
+        self.imageSecond = self.request.get_param("inputSecondImage")
+        self.configTypeTextWriter = self.request.get_param("configTypeTextWriter")
 
     @staticmethod
     def bootstrap(config: dict) -> dict:
         return {}
 
-    def zoom(self,img):
+    def TextWriter(self,img):
         return  img[50:180, 100:300]
 
 
     def run(self):
         img =Image.get_frame(img=self.image,redis_db=self.redis_db)
-        img.value=self.zoom(img.value)
+        img.value=self.TextWriter(img.value)
         self.image = Image.set_frame(img=img, package_uID=self.uID, redis_db=self.redis_db)
-        packageModel = build_response(context=self)
+        packageModel = build_response_texwriter(context=self)
         return packageModel
 
 if "__main__" == __name__:

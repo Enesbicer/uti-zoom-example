@@ -3,8 +3,8 @@ from typing import List, Optional, Union, Literal
 from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, Config
 
 
-class InputImage(Input):
-    name: Literal["inputImage"] = "inputImage"
+class InputFirstImage(Input):
+    name: Literal["inputFirstImage"] = "inputFirstImage"
     value: Union[List[Image], Image]
     type: str = "object"
 
@@ -20,8 +20,8 @@ class InputImage(Input):
         title = "Image"
 
 
-class InputImageTwo(Input):
-    name: Literal["inputText"] = "inputText"
+class InputSecondImage(Input):
+    name: Literal["inputSecondImage"] = "inputSecondImage"
     value: Union[List[Image], Image]
     type: str = "object"
 
@@ -37,8 +37,8 @@ class InputImageTwo(Input):
         title = "Text"
 
 
-class OutputImage(Output):
-    name: Literal["outputImage"] = "outputImage"
+class OutputFirstImage(Output):
+    name: Literal["outputFirstImage"] = "outputFirstImage"
     value: Union[List[Image], Image]
     type: str = "object"
 
@@ -54,8 +54,8 @@ class OutputImage(Output):
         title = "Image"
 
 
-class OutputImageTwo(Output):
-    name: Literal["outputText"] = "outputText"
+class OutputSecondImage(Output):
+    name: Literal["outputSecondImage"] = "outputSecondImage"
     value: Union[List[Image], Image]
     type: str = "object"
 
@@ -114,7 +114,6 @@ class ConfigTypeTextWriter(Config):
     class Config:
         title = "Text Writer"
 
-
 class ZoomVariable(Config):
     """
          Ne kadar zoom yapmak istediğinizi yüzdelik üzerinden giriniz.
@@ -127,13 +126,6 @@ class ZoomVariable(Config):
 
     class Config:
         title = "Zoom Percentage"
-
-
-
-
-
-
-
 
 class TextWriterExecutorInputs(Inputs):
     inputImage: InputImage
@@ -172,14 +164,6 @@ class TextWriterExecutor(Config):
             }
         }
 
-
-
-
-
-
-
-
-
 class ZoomExampleExecutorInputs(Inputs):
     inputImage: InputImage
 
@@ -217,16 +201,6 @@ class ZoomExampleExecutor(Config):
             }
         }
 
-
-
-
-
-
-
-
-
-
-
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
     value: Union[ZoomExampleExecutor,TextWriterExecutor]
@@ -238,7 +212,6 @@ class ConfigExecutor(Config):
         title = "Task"
 
 
-
 class PackageConfigs(Configs):
     executor: ConfigExecutor
 
@@ -247,6 +220,7 @@ class PackageModel(Package):
     configs: PackageConfigs
     type: Literal["component"] = "component"
     name: Literal["ZoomExample"] = "ZoomExample"
+
 
 
 
