@@ -20,7 +20,7 @@ class ZoomExampleExecutor(Component):
         super().__init__(request, bootstrap)
         self.request.model = PackageModel(**(self.request.data))
         self.zoomVariable=self.request.get_param("zoomVariable")
-        self.image = self.request.get_param("inputFirstImage")
+        self.image = self.request.get_param("inputImage")
 
     @staticmethod
     def bootstrap(config: dict) -> dict:

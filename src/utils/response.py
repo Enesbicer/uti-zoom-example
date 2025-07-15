@@ -1,7 +1,7 @@
 
 from sdks.novavision.src.helper.package import PackageHelper
 from components.ZoomExample.src.models.PackageModel import (PackageModel, PackageConfigs,
-ConfigExecutor, ZoomExampleExecutor,ZoomExampleExecutorResponse,ZoomExampleExecutorOutputs,OutputImage,TextWriterExecutorOutputs,TextWriterExecutorResponse,TextWriterExecutor)
+ConfigExecutor, ZoomExampleExecutor,ZoomExampleExecutorResponse,ZoomExampleExecutorOutputs,OutputImage,TextWriterExecutorOutputs,TextWriterExecutorResponse,TextWriterExecutor,OutputSecondImage)
 
 
 def build_response_zoom(context):
@@ -17,7 +17,8 @@ def build_response_zoom(context):
 
 def build_response_textwriter(context):
     outputImage = OutputImage(value=context.image)
-    textWriterExecutorOutputs = TextWriterExecutorOutputs(outputImage=outputImage)
+    outputSecondImage = OutputSecondImage(value=context.image)
+    textWriterExecutorOutputs = TextWriterExecutorOutputs(outputImage=outputImage, outputSecondImage=outputSecondImage)
     textWriterExecutorResponse = TextWriterExecutorResponse(outputs=textWriterExecutorOutputs)
     textWriterExecutor = TextWriterExecutor(value=textWriterExecutorResponse)
     configExecutor = ConfigExecutor(value=textWriterExecutor)
