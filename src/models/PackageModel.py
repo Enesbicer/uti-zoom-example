@@ -73,7 +73,7 @@ class OutputSecondImage(Output):
 
 class TextWriterText(Config):
     """
-         Resimde görünmesini istediğiniz text'i girininiz
+         Resimde görünmesini istediğiniz yazıyı girininiz
     """
     name: Literal["textWriterText"] = "textWriterText"
     value: str
