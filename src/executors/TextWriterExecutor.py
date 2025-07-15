@@ -25,40 +25,42 @@ class TextWriterExecutor(Component):
 
     def TextWriter(self,img1,img2):
         font = cv2.FONT_HERSHEY_SIMPLEX
-        font_scale = 2.0
         thickness = 3
-        color = (255, 255, 255)  # Beyaz text
-        shadow_color = (0, 0, 0)  # Siyah gölge
+        color = (255, 255, 255)
+        shadow_color = (0, 0, 0)
 
-        (text_width, text_height), _ = cv2.getTextSize(self.textWriterText, font, font_scale, thickness)
-        h, w = img1.shape[:2]
+        def get_position_and_scale(img):
+            h, w = img.shape[:2]
+            base_font_scale = 1.0
+            (text_width, _), _ = cv2.getTextSize(self.textWriterText, font, base_font_scale, thickness)
+            target_ratio = 0.2  # metin genişliği, görselin %60'ını kapsasın
+            font_scale = (w * target_ratio) / text_width
 
+            (text_width, text_height), _ = cv2.getTextSize(self.textWriterText, font, font_scale, thickness)
 
-        if self.configTypeTextWriter == "Center":
-            x = (w - text_width) // 2
-            y = (h + text_height) // 2
-        elif self.configTypeTextWriter == "Top":
-            x = (w - text_width) // 2
-            y = text_height + 20
-        else:
-            x, y = 50, 50
+            if self.configTypeTextWriter == "Center":
+                x = (w - text_width) // 2
+                y = (h + text_height) // 2
+            elif self.configTypeTextWriter == "Top":
+                x = (w - text_width) // 2
+                y = text_height + 20
+            else:
+                x, y = 50, 50
 
+            x = max(10, min(x, w - text_width - 10))
+            y = max(text_height + 10, min(y, h - 20))
 
-        if x < 0: x = 10
-        if y < text_height: y = text_height + 10
-        if x + text_width > w: x = w - text_width - 10
-        if y > h - 10: y = h - 20
+            return x, y, font_scale
 
+        # img1
+        x1, y1, scale1 = get_position_and_scale(img1)
+        cv2.putText(img1, self.textWriterText, (x1 + 3, y1 + 3), font, scale1, shadow_color, thickness + 1, cv2.LINE_AA)
+        cv2.putText(img1, self.textWriterText, (x1, y1), font, scale1, color, thickness, cv2.LINE_AA)
 
-
-        cv2.putText(img1, self.textWriterText, (x + 3, y + 3), font, font_scale, shadow_color, thickness + 1,
-                    cv2.LINE_AA)
-        cv2.putText(img1, self.textWriterText, (x, y), font, font_scale, color, thickness, cv2.LINE_AA)
-
-
-        cv2.putText(img2, self.textWriterText, (x + 3, y + 3), font, font_scale, shadow_color, thickness + 1,
-                    cv2.LINE_AA)
-        cv2.putText(img2, self.textWriterText, (x, y), font, font_scale, color, thickness, cv2.LINE_AA)
+        # img2
+        x2, y2, scale2 = get_position_and_scale(img2)
+        cv2.putText(img2, self.textWriterText, (x2 + 3, y2 + 3), font, scale2, shadow_color, thickness + 1, cv2.LINE_AA)
+        cv2.putText(img2, self.textWriterText, (x2, y2), font, scale2, color, thickness, cv2.LINE_AA)
 
         return img1, img2
 
