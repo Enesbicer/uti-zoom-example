@@ -3,8 +3,8 @@ from typing import List, Optional, Union, Literal
 from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, Config
 
 
-class InputFirstImage(Input):
-    name: Literal["inputFirstImage"] = "inputFirstImage"
+class InputImage(Input):
+    name: Literal["inputImage"] = "inputImage"
     value: Union[List[Image], Image]
     type: str = "object"
 
@@ -37,8 +37,8 @@ class InputSecondImage(Input):
         title = "Text"
 
 
-class OutputFirstImage(Output):
-    name: Literal["outputFirstImage"] = "outputFirstImage"
+class OutputImage(Output):
+    name: Literal["outputImage"] = "outputImage"
     value: Union[List[Image], Image]
     type: str = "object"
 
