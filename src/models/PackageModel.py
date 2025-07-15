@@ -83,6 +83,35 @@ class TextWriterText(Config):
     class Config:
         title = "Text Writer Input"
 
+class Left(Config):
+    configEdit: TextWriterText
+    name:Literal["Left"] = "Left"
+    value:Literal["Left"] = "Left"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Left"
+
+class Right(Config):
+    configEdit: TextWriterText
+    name:Literal["Right"] = "Right"
+    value:Literal["Right"] = "Right"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Right"
+
+class Bottom(Config):
+    configEdit: TextWriterText
+    name:Literal["Bottom"] = "Bottom"
+    value:Literal["Bottom"] = "Bottom"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Bottom"
 
 class Top(Config):
     configEdit: TextWriterText

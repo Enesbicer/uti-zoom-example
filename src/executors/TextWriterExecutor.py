@@ -44,6 +44,15 @@ class TextWriterExecutor(Component):
             elif self.configTypeTextWriter == "Top":
                 x = (w - text_width) // 2
                 y = text_height + 20
+            elif self.configTypeTextWriter == "Bottom":
+                x = (w - text_width) // 2
+                y = h - 20
+            elif self.configTypeTextWriter == "Left":
+                x = 20
+                y = (h + text_height) // 2
+            elif self.configTypeTextWriter == "Right":
+                x = w - text_width - 20
+                y = (h + text_height) // 2
             else:
                 x, y = 50, 50
 
