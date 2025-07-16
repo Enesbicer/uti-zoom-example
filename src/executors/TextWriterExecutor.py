@@ -33,7 +33,7 @@ class TextWriterExecutor(Component):
             h, w = img.shape[:2]
             base_font_scale = 1.0
             (text_width, _), _ = cv2.getTextSize(self.textWriterText, font, base_font_scale, thickness)
-            target_ratio = 0.2  # metin genişliği, görselin %60'ını kapsasın
+            target_ratio = 0.2  # metin genişliği, görselin % kaçını kapsasın
             font_scale = (w * target_ratio) / text_width
 
             (text_width, text_height), _ = cv2.getTextSize(self.textWriterText, font, font_scale, thickness)
@@ -61,12 +61,12 @@ class TextWriterExecutor(Component):
 
             return x, y, font_scale
 
-        # img1
+
         x1, y1, scale1 = get_position_and_scale(img1)
         cv2.putText(img1, self.textWriterText, (x1 + 3, y1 + 3), font, scale1, shadow_color, thickness + 1, cv2.LINE_AA)
         cv2.putText(img1, self.textWriterText, (x1, y1), font, scale1, color, thickness, cv2.LINE_AA)
 
-        # img2
+
         x2, y2, scale2 = get_position_and_scale(img2)
         cv2.putText(img2, self.textWriterText, (x2 + 3, y2 + 3), font, scale2, shadow_color, thickness + 1, cv2.LINE_AA)
         cv2.putText(img2, self.textWriterText, (x2, y2), font, scale2, color, thickness, cv2.LINE_AA)

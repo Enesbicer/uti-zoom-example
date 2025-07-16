@@ -41,11 +41,11 @@ class ZoomExampleExecutor(Component):
         cropped = image[start_y:start_y + new_h, start_x:start_x + new_w]
         zoomed = cv2.resize(cropped, (w, h), interpolation=cv2.INTER_LINEAR)
 
-        # Eğer Border Applier false ise, doğrudan dön
+
         if not self.borderApplier:
             return zoomed
 
-        # BorderColor seçimi
+
         color_map = {
             "Black": (0, 0, 0),
             "Blue": (255, 0, 0),
@@ -69,7 +69,7 @@ class ZoomExampleExecutor(Component):
                 cv2.line(zoomed, (w - 1, i), (w - 1, min(i + step, h - 1)), color, thickness)
 
         elif self.borderStyle == "borderDouble":
-            offset = 6
+            offset = 12 #iki çizgi arası mesafe
             cv2.rectangle(zoomed, (0, 0), (w - 1, h - 1), color, thickness)
             cv2.rectangle(zoomed, (offset, offset), (w - 1 - offset, h - 1 - offset), color, thickness)
 
