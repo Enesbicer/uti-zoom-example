@@ -216,7 +216,7 @@ class Color(Config):
 
 
 class BorderSolid(Config):
-    configEdit: BorderColor
+    configEdit: Color
     name: Literal["borderSolid"] = "borderSolid"
     value: Literal["borderSolid"] = "borderSolid"
     type: Literal["string"] = "string"
@@ -227,7 +227,7 @@ class BorderSolid(Config):
 
 
 class BorderDouble(Config):
-    configEdit: BorderColor
+    configEdit: Color
     name: Literal["borderDouble"] = "borderDouble"
     value: Literal["borderDouble"] = "borderDouble"
     type: Literal["string"] = "string"
@@ -238,7 +238,7 @@ class BorderDouble(Config):
 
 
 class BorderDashed(Config):
-    configEdit: BorderColor
+    configEdit: Color
     name: Literal["borderDashed"] = "borderDashed"
     value: Literal["borderDashed"] = "borderDashed"
     type: Literal["string"] = "string"
