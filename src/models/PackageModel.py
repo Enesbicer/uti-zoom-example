@@ -196,7 +196,7 @@ class BorderColor(Config):
         Apply the border
     """
     name: Literal["BorderColor"] = "BorderColor"
-    value: Union[]
+    value: Union[BorderColorBlack, BorderColorRed, BorderColorGreen, BorderColorBlue]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
