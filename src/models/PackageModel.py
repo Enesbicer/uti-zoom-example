@@ -136,12 +136,185 @@ class ConfigTypeTextWriter(Config):
         Yazınızın resimde ki konumu.
     """
     name: Literal["configTypeTextWriter"] = "configTypeTextWriter"
-    value: Union[Center, Top]
+    value: Union[Center,Top,Left,Right,Bottom]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
     class Config:
         title = "Text Writer"
+
+
+
+
+
+
+
+
+class BorderColorGreen(Config):
+    name: Literal["ColorBlack"] = "ColorBlack"
+    value: Literal["Black"] = "Black"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Green"
+
+
+class BorderColorBlue(Config):
+    name: Literal["ColorBlack"] = "ColorBlack"
+    value: Literal["Black"] = "Black"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Blue"
+
+class BorderColorRed(Config):
+    name: Literal["ColorBlack"] = "ColorBlack"
+    value: Literal["Black"] = "Black"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Red"
+
+class BorderColorBlack(Config):
+    name: Literal["ColorBlack"] = "ColorBlack"
+    value: Literal["Black"] = "Black"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Black"
+
+
+
+
+
+class BorderColor(Config):
+    """
+        Apply the border
+    """
+    name: Literal["BorderColor"] = "BorderColor"
+    value: Union[]
+    type: Literal["object"] = "object"
+    field: Literal["dropdownlist"] = "dropdownlist"
+
+    class Config:
+        title = "Border Color"
+
+
+
+
+
+class BorderSolid(Config):
+    configEdit: BorderColor
+    name: Literal["BorderSolid"] = "BorderSolid"
+    value: Literal["BorderSolid"] = "BorderSolid"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Solid"
+
+
+
+class BorderDouble(Config):
+    configEdit: BorderColor
+    name: Literal["BorderDouble"] = "BorderDouble"
+    value: Literal["BorderDouble"] = "BorderDouble"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Double"
+
+
+class BorderDashed(Config):
+    configEdit: BorderColor
+    name: Literal["BorderDashed"] = "BorderDashed"
+    value: Literal["BorderDashed"] = "BorderDashed"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Dashed"
+
+
+
+class BorderStyle(Config):
+    """
+        Apply the border
+    """
+    name: Literal["BorderStyle"] = "BorderStyle"
+    value: Union[BorderDashed,BorderSolid,BorderDouble]
+    type: Literal["object"] = "object"
+    field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
+
+    class Config:
+        title = "Border Style"
+
+
+
+
+
+
+
+
+
+
+
+class BorderFalse(Config):
+    name: Literal["False"] = "False"
+    value: Literal[False] = False
+    type: Literal["bool"] = "bool"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Disable"
+
+
+class BorderTrue(Config):
+    configEdit:BorderStyle
+    name: Literal["True"] = "True"
+    value: Literal[True] = True
+    type: Literal["bool"] = "bool"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Enable"
+
+
+class BorderApplier(Config):
+    """
+        Apply the border
+    """
+    name: Literal["BorderApplier"] = "BorderApplier"
+    value: Union[BorderTrue, BorderFalse]
+    type: Literal["object"] = "object"
+    field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
+
+    class Config:
+        title = "Border Applier"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class ZoomVariable(Config):
     """
