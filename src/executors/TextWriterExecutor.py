@@ -10,6 +10,7 @@ from sdks.novavision.src.helper.executor import Executor
 from components.ZoomExample.src.utils.response import build_response_textwriter
 from components.ZoomExample.src.models.PackageModel import PackageModel
 
+
 class TextWriterExecutor(Component):
     def __init__(self, request, bootstrap):
         super().__init__(request, bootstrap)
@@ -18,22 +19,33 @@ class TextWriterExecutor(Component):
         self.image = self.request.get_param("inputImage")
         self.secondImage = self.request.get_param("inputSecondImage")
         self.configTypeTextWriter = self.request.get_param("configTypeTextWriter")
+        self.borderColor = self.request.get_param("borderColor")
 
     @staticmethod
     def bootstrap(config: dict) -> dict:
         return {}
 
-    def TextWriter(self,img1,img2):
+    def TextWriter(self, img1, img2):
         font = cv2.FONT_HERSHEY_SIMPLEX
         thickness = 3
-        color = (255, 255, 255)
         shadow_color = (0, 0, 0)
+
+
+        color_map = {
+            "Green": (0, 255, 0),
+            "Red": (0, 0, 255),
+            "Blue": (255, 0, 0),
+            "Black": (0, 0, 0),
+            "White": (255, 255, 255)
+        }
+
+        color = color_map.get(self.fontColor, (255, 255, 255))
 
         def get_position_and_scale(img):
             h, w = img.shape[:2]
             base_font_scale = 1.0
             (text_width, _), _ = cv2.getTextSize(self.textWriterText, font, base_font_scale, thickness)
-            target_ratio = 0.2  # metin genişliği, görselin % kaçını kapsasın
+            target_ratio = 0.2
             font_scale = (w * target_ratio) / text_width
 
             (text_width, text_height), _ = cv2.getTextSize(self.textWriterText, font, font_scale, thickness)
@@ -61,11 +73,9 @@ class TextWriterExecutor(Component):
 
             return x, y, font_scale
 
-
         x1, y1, scale1 = get_position_and_scale(img1)
         cv2.putText(img1, self.textWriterText, (x1 + 3, y1 + 3), font, scale1, shadow_color, thickness + 1, cv2.LINE_AA)
         cv2.putText(img1, self.textWriterText, (x1, y1), font, scale1, color, thickness, cv2.LINE_AA)
-
 
         x2, y2, scale2 = get_position_and_scale(img2)
         cv2.putText(img2, self.textWriterText, (x2 + 3, y2 + 3), font, scale2, shadow_color, thickness + 1, cv2.LINE_AA)
@@ -74,13 +84,14 @@ class TextWriterExecutor(Component):
         return img1, img2
 
     def run(self):
-        img1 =Image.get_frame(img=self.image,redis_db=self.redis_db)
+        img1 = Image.get_frame(img=self.image, redis_db=self.redis_db)
         img2 = Image.get_frame(img=self.secondImage, redis_db=self.redis_db)
         img1.value, img2.value = self.TextWriter(img1.value, img2.value)
         self.image = Image.set_frame(img=img1, package_uID=self.uID, redis_db=self.redis_db)
         self.secondImage = Image.set_frame(img=img2, package_uID=self.uID, redis_db=self.redis_db)
         packageModel = build_response_textwriter(context=self)
         return packageModel
+
 
 if "__main__" == __name__:
     Executor(sys.argv[1]).run()
