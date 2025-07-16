@@ -1,6 +1,7 @@
 from pydantic import Field, validator
 from typing import List, Optional, Union, Literal
-from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, Config
+from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, \
+    Config
 
 
 class InputImage(Input):
@@ -83,71 +84,73 @@ class TextWriterText(Config):
     class Config:
         title = "Text Writer Input"
 
+
 class Left(Config):
     configEdit: TextWriterText
-    name:Literal["Left"] = "Left"
-    value:Literal["Left"] = "Left"
+    name: Literal["Left"] = "Left"
+    value: Literal["Left"] = "Left"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
         title = "Left"
 
+
 class Right(Config):
     configEdit: TextWriterText
-    name:Literal["Right"] = "Right"
-    value:Literal["Right"] = "Right"
+    name: Literal["Right"] = "Right"
+    value: Literal["Right"] = "Right"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
         title = "Right"
 
+
 class Bottom(Config):
     configEdit: TextWriterText
-    name:Literal["Bottom"] = "Bottom"
-    value:Literal["Bottom"] = "Bottom"
+    name: Literal["Bottom"] = "Bottom"
+    value: Literal["Bottom"] = "Bottom"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
         title = "Bottom"
 
+
 class Top(Config):
     configEdit: TextWriterText
-    name:Literal["Top"] = "Top"
-    value:Literal["Top"] = "Top"
+    name: Literal["Top"] = "Top"
+    value: Literal["Top"] = "Top"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
         title = "Top"
+
+
 class Center(Config):
     configEdit: TextWriterText
-    name:Literal["Center"] = "Center"
-    value:Literal["Center"] = "Center"
+    name: Literal["Center"] = "Center"
+    value: Literal["Center"] = "Center"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
         title = "Center"
+
+
 class ConfigTypeTextWriter(Config):
     """
         Yazınızın resimde ki konumu.
     """
     name: Literal["configTypeTextWriter"] = "configTypeTextWriter"
-    value: Union[Center,Top,Left,Right,Bottom]
+    value: Union[Center, Top, Left, Right, Bottom]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
     class Config:
         title = "Text Writer"
-
-
-
-
-
-
 
 
 class Green(Config):
@@ -169,6 +172,7 @@ class Blue(Config):
     class Config:
         title = "Blue"
 
+
 class Red(Config):
     name: Literal["Red"] = "Red"
     value: Literal["Red"] = "Red"
@@ -177,6 +181,7 @@ class Red(Config):
 
     class Config:
         title = "Red"
+
 
 class Black(Config):
     name: Literal["Black"] = "Black"
@@ -188,23 +193,17 @@ class Black(Config):
         title = "Black"
 
 
-
-
-
 class BorderColor(Config):
     """
         Apply the border
     """
     name: Literal["BorderColor"] = "BorderColor"
-    value: Union[Black,Red,Blue,Green]
+    value: Union[Black, Red, Blue, Green]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
     class Config:
         title = "Border Color"
-
-
-
 
 
 class BorderSolid(Config):
@@ -216,7 +215,6 @@ class BorderSolid(Config):
 
     class Config:
         title = "Solid"
-
 
 
 class BorderDouble(Config):
@@ -241,27 +239,17 @@ class BorderDashed(Config):
         title = "Dashed"
 
 
-
 class BorderStyle(Config):
     """
         Apply the border
     """
     name: Literal["BorderStyle"] = "BorderStyle"
-    value: Union[BorderDashed,BorderSolid,BorderDouble]
+    value: Union[BorderDashed, BorderSolid, BorderDouble]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
     class Config:
         title = "Border Style"
-
-
-
-
-
-
-
-
-
 
 
 class BorderFalse(Config):
@@ -275,7 +263,7 @@ class BorderFalse(Config):
 
 
 class BorderTrue(Config):
-    configEdit:BorderStyle
+    configEdit: BorderStyle
     name: Literal["True"] = "True"
     value: Literal[True] = True
     type: Literal["bool"] = "bool"
@@ -289,7 +277,7 @@ class BorderApplier(Config):
     """
         Apply the border
     """
-    name: Literal["BorderApplier"] = "BorderApplier"
+    name: Literal["borderApplier"] = "borderApplier"
     value: Union[BorderTrue, BorderFalse]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
@@ -298,29 +286,10 @@ class BorderApplier(Config):
         title = "Border Applier"
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class ZoomVariable(Config):
     """
          Ne kadar zoom yapmak istediğinizi yüzdelik üzerinden giriniz.
     """
-    configEdit: BorderApplier
     name: Literal["zoomVariable"] = "zoomVariable"
     value: int = Field(default=1, ge=1, le=100)
     type: Literal["number"] = "number"
@@ -330,18 +299,20 @@ class ZoomVariable(Config):
     class Config:
         title = "Zoom Percentage"
 
+
 class TextWriterExecutorInputs(Inputs):
     inputImage: InputImage
     inputSecondImage: InputSecondImage
 
 
 class TextWriterExecutorConfigs(Configs):
-    configTypeTextWriter : ConfigTypeTextWriter
+    configTypeTextWriter: ConfigTypeTextWriter
 
 
 class TextWriterExecutorOutputs(Outputs):
     outputImage: OutputImage
     outputSecondImage: OutputSecondImage
+
 
 class TextWriterExecutorRequest(Request):
     inputs: Optional[TextWriterExecutorInputs]
@@ -352,8 +323,10 @@ class TextWriterExecutorRequest(Request):
             "target": "configs"
         }
 
+
 class TextWriterExecutorResponse(Response):
     outputs: TextWriterExecutorOutputs
+
 
 class TextWriterExecutor(Config):
     name: Literal["TextWriterExecutor"] = "TextWriterExecutor"
@@ -369,16 +342,19 @@ class TextWriterExecutor(Config):
             }
         }
 
+
 class ZoomExampleExecutorInputs(Inputs):
     inputImage: InputImage
 
 
 class ZoomExampleExecutorConfigs(Configs):
-    zoomVariable:ZoomVariable
+    zoomVariable: ZoomVariable
+    borderApplier: BorderApplier
 
 
 class ZoomExampleExecutorOutputs(Outputs):
     outputImage: OutputImage
+
 
 class ZoomExampleExecutorRequest(Request):
     inputs: Optional[ZoomExampleExecutorInputs]
@@ -389,8 +365,10 @@ class ZoomExampleExecutorRequest(Request):
             "target": "configs"
         }
 
+
 class ZoomExampleExecutorResponse(Response):
     outputs: ZoomExampleExecutorOutputs
+
 
 class ZoomExampleExecutor(Config):
     name: Literal["ZoomExampleExecutor"] = "ZoomExampleExecutor"
@@ -406,12 +384,12 @@ class ZoomExampleExecutor(Config):
             }
         }
 
+
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
-    value: Union[ZoomExampleExecutor,TextWriterExecutor]
+    value: Union[ZoomExampleExecutor, TextWriterExecutor]
     type: Literal["executor"] = "executor"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
-
 
     class Config:
         title = "Task"
