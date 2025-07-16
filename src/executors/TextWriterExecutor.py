@@ -19,7 +19,7 @@ class TextWriterExecutor(Component):
         self.image = self.request.get_param("inputImage")
         self.secondImage = self.request.get_param("inputSecondImage")
         self.configTypeTextWriter = self.request.get_param("configTypeTextWriter")
-        self.borderColor = self.request.get_param("borderColor")
+        self.color = self.request.get_param("color")
 
     @staticmethod
     def bootstrap(config: dict) -> dict:
@@ -39,7 +39,7 @@ class TextWriterExecutor(Component):
             "White": (255, 255, 255)
         }
 
-        color = color_map.get(self.fontColor, (255, 255, 255))
+        color = color_map.get(self.color, (255, 255, 255))
 
         def get_position_and_scale(img):
             h, w = img.shape[:2]

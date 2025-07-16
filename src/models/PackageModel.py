@@ -74,7 +74,7 @@ class OutputSecondImage(Output):
 
 class TextWriterText(Config):
     """
-         Resimde görünmesini istediğiniz yazıyı girininiz
+        Please enter the text you want displayed on the image.
     """
     name: Literal["textWriterText"] = "textWriterText"
     value: str
@@ -142,7 +142,7 @@ class Center(Config):
 
 class ConfigTypeTextWriter(Config):
     """
-        Yazınızın resimde ki konumu.
+        The position of your text on the image.
     """
     name: Literal["configTypeTextWriter"] = "configTypeTextWriter"
     value: Union[Center, Top, Left, Right, Bottom]
@@ -152,6 +152,15 @@ class ConfigTypeTextWriter(Config):
     class Config:
         title = "Text Writer"
 
+
+class White(Config):
+    name: Literal["White"] = "White"
+    value: Literal["White"] = "White"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "White"
 
 class Green(Config):
     name: Literal["Green"] = "Green"
@@ -193,12 +202,12 @@ class Black(Config):
         title = "Black"
 
 
-class BorderColor(Config):
+class Color(Config):
     """
-        Apply the border
+        Select one of the colors
     """
-    name: Literal["borderColor"] = "borderColor"
-    value: Union[Black, Red, Blue, Green]
+    name: Literal["color"] = "color"
+    value: Union[Black, Red, Blue, Green, White]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
@@ -307,6 +316,7 @@ class TextWriterExecutorInputs(Inputs):
 
 class TextWriterExecutorConfigs(Configs):
     configTypeTextWriter: ConfigTypeTextWriter
+    color : Color
 
 
 class TextWriterExecutorOutputs(Outputs):

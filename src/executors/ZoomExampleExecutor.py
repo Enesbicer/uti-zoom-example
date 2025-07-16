@@ -51,6 +51,7 @@ class ZoomExampleExecutor(Component):
             "Blue": (255, 0, 0),
             "Red": (0, 0, 255),
             "Green": (0, 255, 0),
+            "White": (255, 255, 255)
         }
         color = color_map.get(self.borderColor.capitalize(), (0, 0, 0))
 
