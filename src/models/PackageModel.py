@@ -85,6 +85,74 @@ class TextWriterText(Config):
         title = "Text Writer Input"
 
 
+class Left(Config):
+    configEdit: TextWriterText
+    name: Literal["Left"] = "Left"
+    value: Literal["Left"] = "Left"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Left"
+
+
+class Right(Config):
+    configEdit: TextWriterText
+    name: Literal["Right"] = "Right"
+    value: Literal["Right"] = "Right"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Right"
+
+
+class Bottom(Config):
+    configEdit: TextWriterText
+    name: Literal["Bottom"] = "Bottom"
+    value: Literal["Bottom"] = "Bottom"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Bottom"
+
+
+class Top(Config):
+    configEdit: TextWriterText
+    name: Literal["Top"] = "Top"
+    value: Literal["Top"] = "Top"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Top"
+
+
+class Center(Config):
+    configEdit: TextWriterText
+    name: Literal["Center"] = "Center"
+    value: Literal["Center"] = "Center"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Center"
+
+
+class ConfigTypeTextWriter(Config):
+    """
+        The position of your text on the image.
+    """
+    name: Literal["configTypeTextWriter"] = "configTypeTextWriter"
+    value: Union[Center, Top, Left, Right, Bottom]
+    type: Literal["object"] = "object"
+    field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
+
+    class Config:
+        title = "Text Writer"
+
+
 class White(Config):
     name: Literal["White"] = "White"
     value: Literal["White"] = "White"
@@ -134,94 +202,21 @@ class Black(Config):
         title = "Black"
 
 
-class Color(Config):
+class BorderColor(Config):
     """
         Select one of the colors
     """
-    name: Literal["color"] = "color"
+    name: Literal["borderColor"] = "borderColor"
     value: Union[Black, Red, Blue, Green, White]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
     class Config:
-        title = "Color"
-
-
-class Left(Config):
-    configEdit: TextWriterText
-    name: Literal["Left"] = "Left"
-    value: Literal["Left"] = "Left"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Left"
-
-
-class Right(Config):
-    configEdit: TextWriterText
-    name: Literal["Right"] = "Right"
-    value: Literal["Right"] = "Right"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Right"
-
-
-class Bottom(Config):
-    configEdit: TextWriterText
-    name: Literal["Bottom"] = "Bottom"
-    value: Literal["Bottom"] = "Bottom"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Bottom"
-
-
-class Top(Config):
-    configEdit: TextWriterText
-    configEdit: Color
-    name: Literal["Top"] = "Top"
-    value: Literal["Top"] = "Top"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Top"
-
-
-class Center(Config):
-    configEdit: TextWriterText
-    configEdit: Color
-    name: Literal["Center"] = "Center"
-    value: Literal["Center"] = "Center"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Center"
-
-
-class ConfigTypeTextWriter(Config):
-    """
-        The position of your text on the image.
-    """
-    name: Literal["configTypeTextWriter"] = "configTypeTextWriter"
-    value: Union[Center, Top, Left, Right, Bottom]
-    type: Literal["object"] = "object"
-    field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
-
-    class Config:
-        title = "Text Writer"
-
-
-
+        title = "Border Color"
 
 
 class BorderSolid(Config):
-    configEdit: Color
+    configEdit: BorderColor
     name: Literal["borderSolid"] = "borderSolid"
     value: Literal["borderSolid"] = "borderSolid"
     type: Literal["string"] = "string"
@@ -232,7 +227,7 @@ class BorderSolid(Config):
 
 
 class BorderDouble(Config):
-    configEdit: Color
+    configEdit: BorderColor
     name: Literal["borderDouble"] = "borderDouble"
     value: Literal["borderDouble"] = "borderDouble"
     type: Literal["string"] = "string"
@@ -243,7 +238,7 @@ class BorderDouble(Config):
 
 
 class BorderDashed(Config):
-    configEdit: Color
+    configEdit: BorderColor
     name: Literal["borderDashed"] = "borderDashed"
     value: Literal["borderDashed"] = "borderDashed"
     type: Literal["string"] = "string"
@@ -321,7 +316,7 @@ class TextWriterExecutorInputs(Inputs):
 
 class TextWriterExecutorConfigs(Configs):
     configTypeTextWriter: ConfigTypeTextWriter
-    color : Color
+    borderColor : BorderColor
 
 
 class TextWriterExecutorOutputs(Outputs):

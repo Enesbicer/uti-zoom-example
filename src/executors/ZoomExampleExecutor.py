@@ -22,7 +22,7 @@ class ZoomExampleExecutor(Component):
         self.zoomVariable=self.request.get_param("zoomVariable")
         self.image = self.request.get_param("inputImage")
         self.borderApplier = self.request.get_param("borderApplier")
-        self.color = self.request.get_param("color")
+        self.borderColor = self.request.get_param("borderColor")
         self.borderStyle = self.request.get_param("borderStyle")
 
     @staticmethod
@@ -53,7 +53,7 @@ class ZoomExampleExecutor(Component):
             "Green": (0, 255, 0),
             "White": (255, 255, 255)
         }
-        color = color_map.get(self.color.capitalize(), (0, 0, 0))
+        color = color_map.get(self.borderColor.capitalize(), (0, 0, 0))
 
         thickness = 4
 
