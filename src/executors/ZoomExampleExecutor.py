@@ -21,6 +21,9 @@ class ZoomExampleExecutor(Component):
         self.request.model = PackageModel(**(self.request.data))
         self.zoomVariable=self.request.get_param("zoomVariable")
         self.image = self.request.get_param("inputImage")
+        self.borderApplier = self.request.get_param("borderApplier")
+        self.borderColor = self.request.get_param("borderColor")
+        self.borderStyle = self.request.get_param("borderStyle")
 
     @staticmethod
     def bootstrap(config: dict) -> dict:
@@ -37,6 +40,38 @@ class ZoomExampleExecutor(Component):
         start_x = center_x - new_w // 2
         cropped = image[start_y:start_y + new_h, start_x:start_x + new_w]
         zoomed = cv2.resize(cropped, (w, h), interpolation=cv2.INTER_LINEAR)
+
+        # Eğer Border Applier false ise, doğrudan dön
+        if not self.borderApplier:
+            return zoomed
+
+        # BorderColor seçimi
+        color_map = {
+            "Black": (0, 0, 0),
+            "Blue": (255, 0, 0),
+            "Red": (0, 0, 255),
+            "Green": (0, 255, 0),
+        }
+        color = color_map.get(self.borderColor.capitalize(), (0, 0, 0))
+
+        thickness = 4
+
+        if self.borderStyle == "borderSolid":
+            cv2.rectangle(zoomed, (0, 0), (w - 1, h - 1), color, thickness)
+
+        elif self.borderStyle == "borderDashed":
+            step = 20
+            for i in range(0, w, step * 2):
+                cv2.line(zoomed, (i, 0), (min(i + step, w - 1), 0), color, thickness)
+                cv2.line(zoomed, (i, h - 1), (min(i + step, w - 1), h - 1), color, thickness)
+            for i in range(0, h, step * 2):
+                cv2.line(zoomed, (0, i), (0, min(i + step, h - 1)), color, thickness)
+                cv2.line(zoomed, (w - 1, i), (w - 1, min(i + step, h - 1)), color, thickness)
+
+        elif self.borderStyle == "borderDouble":
+            offset = 6
+            cv2.rectangle(zoomed, (0, 0), (w - 1, h - 1), color, thickness)
+            cv2.rectangle(zoomed, (offset, offset), (w - 1 - offset, h - 1 - offset), color, thickness)
 
         return zoomed
 

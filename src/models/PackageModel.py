@@ -197,7 +197,7 @@ class BorderColor(Config):
     """
         Apply the border
     """
-    name: Literal["BorderColor"] = "BorderColor"
+    name: Literal["borderColor"] = "borderColor"
     value: Union[Black, Red, Blue, Green]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
@@ -208,8 +208,8 @@ class BorderColor(Config):
 
 class BorderSolid(Config):
     configEdit: BorderColor
-    name: Literal["BorderSolid"] = "BorderSolid"
-    value: Literal["BorderSolid"] = "BorderSolid"
+    name: Literal["borderSolid"] = "borderSolid"
+    value: Literal["borderSolid"] = "borderSolid"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
@@ -219,8 +219,8 @@ class BorderSolid(Config):
 
 class BorderDouble(Config):
     configEdit: BorderColor
-    name: Literal["BorderDouble"] = "BorderDouble"
-    value: Literal["BorderDouble"] = "BorderDouble"
+    name: Literal["borderDouble"] = "borderDouble"
+    value: Literal["borderDouble"] = "borderDouble"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
@@ -230,8 +230,8 @@ class BorderDouble(Config):
 
 class BorderDashed(Config):
     configEdit: BorderColor
-    name: Literal["BorderDashed"] = "BorderDashed"
-    value: Literal["BorderDashed"] = "BorderDashed"
+    name: Literal["borderDashed"] = "borderDashed"
+    value: Literal["borderDashed"] = "borderDashed"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
@@ -243,7 +243,7 @@ class BorderStyle(Config):
     """
         Apply the border
     """
-    name: Literal["BorderStyle"] = "BorderStyle"
+    name: Literal["borderStyle"] = "borderStyle"
     value: Union[BorderDashed, BorderSolid, BorderDouble]
     type: Literal["object"] = "object"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
