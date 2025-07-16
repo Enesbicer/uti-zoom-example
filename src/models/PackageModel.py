@@ -316,7 +316,7 @@ class TextWriterExecutorInputs(Inputs):
 
 class TextWriterExecutorConfigs(Configs):
     configTypeTextWriter: ConfigTypeTextWriter
-    borderColor : BorderColor
+
 
 
 class TextWriterExecutorOutputs(Outputs):
