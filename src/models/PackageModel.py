@@ -120,6 +120,7 @@ class Bottom(Config):
 
 class Top(Config):
     configEdit: TextWriterText
+    configEdit: Color
     name: Literal["Top"] = "Top"
     value: Literal["Top"] = "Top"
     type: Literal["string"] = "string"
@@ -131,6 +132,7 @@ class Top(Config):
 
 class Center(Config):
     configEdit: TextWriterText
+    configEdit: Color
     name: Literal["Center"] = "Center"
     value: Literal["Center"] = "Center"
     type: Literal["string"] = "string"
@@ -212,7 +214,7 @@ class Color(Config):
     field: Literal["dropdownlist"] = "dropdownlist"
 
     class Config:
-        title = "Border Color"
+        title = "Color"
 
 
 class BorderSolid(Config):
@@ -250,7 +252,7 @@ class BorderDashed(Config):
 
 class BorderStyle(Config):
     """
-        Apply the border
+        Select one of the border styles
     """
     name: Literal["borderStyle"] = "borderStyle"
     value: Union[BorderDashed, BorderSolid, BorderDouble]
