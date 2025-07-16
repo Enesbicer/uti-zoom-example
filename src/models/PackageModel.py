@@ -85,6 +85,68 @@ class TextWriterText(Config):
         title = "Text Writer Input"
 
 
+class White(Config):
+    name: Literal["White"] = "White"
+    value: Literal["White"] = "White"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "White"
+
+class Green(Config):
+    name: Literal["Green"] = "Green"
+    value: Literal["Green"] = "Green"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Green"
+
+
+class Blue(Config):
+    name: Literal["Blue"] = "Blue"
+    value: Literal["Blue"] = "Blue"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Blue"
+
+
+class Red(Config):
+    name: Literal["Red"] = "Red"
+    value: Literal["Red"] = "Red"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Red"
+
+
+class Black(Config):
+    name: Literal["Black"] = "Black"
+    value: Literal["Black"] = "Black"
+    type: Literal["string"] = "string"
+    field: Literal["option"] = "option"
+
+    class Config:
+        title = "Black"
+
+
+class Color(Config):
+    """
+        Select one of the colors
+    """
+    name: Literal["color"] = "color"
+    value: Union[Black, Red, Blue, Green, White]
+    type: Literal["object"] = "object"
+    field: Literal["dropdownlist"] = "dropdownlist"
+
+    class Config:
+        title = "Color"
+
+
 class Left(Config):
     configEdit: TextWriterText
     name: Literal["Left"] = "Left"
@@ -155,66 +217,7 @@ class ConfigTypeTextWriter(Config):
         title = "Text Writer"
 
 
-class White(Config):
-    name: Literal["White"] = "White"
-    value: Literal["White"] = "White"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
 
-    class Config:
-        title = "White"
-
-class Green(Config):
-    name: Literal["Green"] = "Green"
-    value: Literal["Green"] = "Green"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Green"
-
-
-class Blue(Config):
-    name: Literal["Blue"] = "Blue"
-    value: Literal["Blue"] = "Blue"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Blue"
-
-
-class Red(Config):
-    name: Literal["Red"] = "Red"
-    value: Literal["Red"] = "Red"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Red"
-
-
-class Black(Config):
-    name: Literal["Black"] = "Black"
-    value: Literal["Black"] = "Black"
-    type: Literal["string"] = "string"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Black"
-
-
-class Color(Config):
-    """
-        Select one of the colors
-    """
-    name: Literal["color"] = "color"
-    value: Union[Black, Red, Blue, Green, White]
-    type: Literal["object"] = "object"
-    field: Literal["dropdownlist"] = "dropdownlist"
-
-    class Config:
-        title = "Color"
 
 
 class BorderSolid(Config):
