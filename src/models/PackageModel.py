@@ -150,9 +150,9 @@ class ConfigTypeTextWriter(Config):
 
 
 
-class BorderColorGreen(Config):
-    name: Literal["ColorBlack"] = "ColorBlack"
-    value: Literal["Black"] = "Black"
+class Green(Config):
+    name: Literal["Green"] = "Green"
+    value: Literal["Green"] = "Green"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
@@ -160,26 +160,26 @@ class BorderColorGreen(Config):
         title = "Green"
 
 
-class BorderColorBlue(Config):
-    name: Literal["ColorBlack"] = "ColorBlack"
-    value: Literal["Black"] = "Black"
+class Blue(Config):
+    name: Literal["Blue"] = "Blue"
+    value: Literal["Blue"] = "Blue"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
         title = "Blue"
 
-class BorderColorRed(Config):
-    name: Literal["ColorBlack"] = "ColorBlack"
-    value: Literal["Black"] = "Black"
+class Red(Config):
+    name: Literal["Red"] = "Red"
+    value: Literal["Red"] = "Red"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
 
     class Config:
         title = "Red"
 
-class BorderColorBlack(Config):
-    name: Literal["ColorBlack"] = "ColorBlack"
+class Black(Config):
+    name: Literal["Black"] = "Black"
     value: Literal["Black"] = "Black"
     type: Literal["string"] = "string"
     field: Literal["option"] = "option"
@@ -196,7 +196,7 @@ class BorderColor(Config):
         Apply the border
     """
     name: Literal["BorderColor"] = "BorderColor"
-    value: Union[BorderColorBlack, BorderColorRed, BorderColorGreen, BorderColorBlue]
+    value: Union[Black,Red,Blue,Green]
     type: Literal["object"] = "object"
     field: Literal["dropdownlist"] = "dropdownlist"
 
